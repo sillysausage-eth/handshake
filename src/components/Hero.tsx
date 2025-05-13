@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
+import { supabase } from '@/utils/supabase'
 
 export function Hero() {
   const [email, setEmail] = useState('')
@@ -19,20 +20,65 @@ export function Hero() {
     setIsSubmitting(true)
     
     try {
-      // In a real app, this would be an API call to your backend
-      // For demo purposes, we'll simulate a response with a random position number
-      await new Promise(resolve => setTimeout(resolve, 1000)) // Simulate network delay
-      
-      // Generate a random position between 1 and 500
-      const randomPosition = Math.floor(Math.random() * 500) + 1
-      
-      setPosition(randomPosition)
-      setSuccess(true)
-      
-      // In a real app, you would store this in your database
-      console.log('Added to waiting list:', { email, position: randomPosition })
-    } catch (err) {
-      setError('Something went wrong. Please try again.')
+      // Check if email already exists
+      const { data: existingEntries } = await supabase
+        .from('waitlist')
+        .select('id')
+        .eq('email', email)
+
+      // If email exists, get position
+      if (existingEntries && existingEntries.length > 0) {
+        // Get position by counting entries with lower IDs
+        const { count } = await supabase
+          .from('waitlist')
+          .select('id', { count: 'exact', head: true })
+          .lt('id', existingEntries[0].id)
+        
+        setPosition((count || 0) + 1)
+        setSuccess(true)
+      } else {
+        // Insert new email
+        const { error: insertError, data: insertData } = await supabase
+          .from('waitlist')
+          .insert([{ email }])
+          .select()
+        
+        if (insertError) {
+          // Check if this is a duplicate key error
+          if (insertError.message.includes('duplicate key') || insertError.message.includes('waitlist_email_key')) {
+            // If it's a duplicate, fetch the record again to get the position
+            const { data: dupEntries } = await supabase
+              .from('waitlist')
+              .select('id')
+              .eq('email', email)
+            
+            if (dupEntries && dupEntries.length > 0) {
+              // Get position by counting entries with lower IDs
+              const { count } = await supabase
+                .from('waitlist')
+                .select('id', { count: 'exact', head: true })
+                .lt('id', dupEntries[0].id)
+              
+              setPosition((count || 0) + 1)
+              setSuccess(true)
+              return
+            }
+          }
+          
+          // For other errors, throw the error
+          throw insertError
+        }
+        
+        // Get position for new entry (total count)
+        const { count } = await supabase
+          .from('waitlist')
+          .select('id', { count: 'exact', head: true })
+        
+        setPosition(count || 1)
+        setSuccess(true)
+      }
+    } catch (err: any) {
+      setError(err.message || 'Something went wrong. Please try again.')
       console.error('Error adding to waiting list:', err)
     } finally {
       setIsSubmitting(false)

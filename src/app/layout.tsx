@@ -52,7 +52,7 @@ export default function RootLayout({
         lexend.variable,
       )}
     >
-      <body className="flex h-full flex-col">{children}</body>
+      <body className="flex min-h-screen flex-col">{children}</body>
     </html>
   )
 }

@@ -1,12 +1,17 @@
-// Updated to use the Handshake horizontal logo SVG from public/images/logos
+import React from 'react'
+import Image from 'next/image'
+import logoHandshake from '@/images/logos/handshake-horizontal.svg'
+
+// Updated to use imported Handshake horizontal logo SVG from src/images/logos instead of public path
 export function Logo(props: React.ComponentPropsWithoutRef<'img'>) {
   return (
-    <img
-      src="/images/logos/handshake-horizontal.svg"
+    <Image
+      src={logoHandshake}
       alt="Handshake Logo"
       width={200}
       height={40}
-      {...props}
+      unoptimized
+      {...props as any}
     />
   )
 }

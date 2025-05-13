@@ -13,6 +13,10 @@ export const metadata: Metadata = {
     'Handshake is an autonomous shopping platform that enables you to delegate grocery shopping to an AI agent. Our AI understands your preferences, habits, budgets, and context - completing purchases end-to-end.',
   keywords: ['AI shopping', 'grocery delivery', 'autonomous shopping', 'AI assistant', 'grocery shopping', 'personal shopper'],
   authors: [{ name: 'Handshake' }],
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+  },
   openGraph: {
     title: 'Handshake - Your AI-Powered Grocery Shopping Assistant',
     description: 'Let our AI handle your grocery shopping. It learns your preferences, manages your budget, and completes purchases automatically.',

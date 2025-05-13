@@ -7,10 +7,10 @@ import '@/styles/tailwind.css'
 export const metadata: Metadata = {
   title: {
     template: '%s - Handshake',
-    default: 'Handshake - Your AI-Powered Grocery Shopping Assistant',
+    default: 'Handshake - Your AI Personal Shopper',
   },
   description:
-    'Handshake is an autonomous shopping platform that enables you to delegate grocery shopping to an AI agent. Our AI understands your preferences, habits, budgets, and context - completing purchases end-to-end.',
+    "Let our agents handle your grocery shopping. From the weekly shop to the kids sports equipment - it does the time-consuming stuff perfectly so you don't have to.",
   keywords: ['AI shopping', 'grocery delivery', 'autonomous shopping', 'AI assistant', 'grocery shopping', 'personal shopper'],
   authors: [{ name: 'Handshake' }],
   icons: {
@@ -18,15 +18,15 @@ export const metadata: Metadata = {
     shortcut: '/favicon.ico',
   },
   openGraph: {
-    title: 'Handshake - Your AI-Powered Grocery Shopping Assistant',
-    description: 'Let our AI handle your grocery shopping. It learns your preferences, manages your budget, and completes purchases automatically.',
+    title: 'Handshake - Your AI Personal Shopper',
+    description: "Let our agents handle your grocery shopping. From the weekly shop to the kids sports equipment - it does the time-consuming stuff perfectly so you don't have to.",
     type: 'website',
     locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Handshake - Your AI-Powered Grocery Shopping Assistant',
-    description: 'Let our AI handle your grocery shopping. It learns your preferences, manages your budget, and completes purchases automatically.',
+    title: 'Handshake - Your AI Personal Shopper',
+    description: "Let our agents handle your grocery shopping. From the weekly shop to the kids sports equipment - it does the time-consuming stuff perfectly so you don't have to.",
   }
 }
 

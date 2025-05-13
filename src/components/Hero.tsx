@@ -56,7 +56,7 @@ export function Hero() {
         </span>
       </h1>
       <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-700">
-        Let our AI handle your grocery shopping. It learns your preferences, manages your budget, and completes purchases automatically - so you don't have to.
+        Let our agents handle your grocery shopping. From the weekly shop to the kids sports equipment - it does the time-consuming stuff perfectly so you don't have to.
       </p>
       
       <div className="mt-10 mx-auto max-w-md">

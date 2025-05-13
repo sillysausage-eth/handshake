@@ -9,23 +9,8 @@ import {
 } from '@headlessui/react'
 import clsx from 'clsx'
 
-import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { Logo } from '@/components/Logo'
-
-function MobileNavLink({
-  href,
-  children,
-}: {
-  href: string
-  children: React.ReactNode
-}) {
-  return (
-    <PopoverButton as={Link} href={href} className="block w-full p-2">
-      {children}
-    </PopoverButton>
-  )
-}
 
 function MobileNavIcon({ open }: { open: boolean }) {
   return (
@@ -71,7 +56,7 @@ function MobileNavigation() {
         transition
         className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl bg-white p-4 text-lg tracking-tight text-slate-900 shadow-xl ring-1 ring-slate-900/5 data-closed:scale-95 data-closed:opacity-0 data-enter:duration-150 data-enter:ease-out data-leave:duration-100 data-leave:ease-in"
       >
-        <MobileNavLink href="/login">Sign in</MobileNavLink>
+        {/* Mobile navigation links can be added here if needed */}
       </PopoverPanel>
     </Popover>
   )
@@ -87,20 +72,7 @@ export function Header() {
               <Logo className="h-10 w-auto" />
             </Link>
           </div>
-          <div className="flex items-center gap-x-5 md:gap-x-8">
-            <div className="hidden md:block">
-              <Link 
-                href="/login" 
-                className="inline-block rounded-lg px-2 py-1 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-              >
-                Sign in
-              </Link>
-            </div>
-            <Button href="/register" color="blue">
-              <span>
-                Get started <span className="hidden lg:inline">today</span>
-              </span>
-            </Button>
+          <div className="flex items-center">
             <div className="-mr-1 md:hidden">
               <MobileNavigation />
             </div>

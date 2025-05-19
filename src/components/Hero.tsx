@@ -13,6 +13,7 @@ export function Hero() {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
   const [position, setPosition] = useState<number | null>(null)
+  const [conversationReady, setConversationReady] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -122,14 +123,15 @@ export function Hero() {
   }
 
   return (
-    <Container className="h-[calc(100vh-160px)] flex items-start pt-20">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start w-full">
+    <Container className="h-auto py-4 flex items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start w-full">
         {/* Left column - text content */}
         <motion.div
           initial="hidden"
           animate="visible"
           variants={containerVariants}
-          className="text-left"
+          className="text-left pt-2"
+          onAnimationComplete={() => setConversationReady(true)}
         >
           <motion.h1 
             className="max-w-4xl font-display text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl whitespace-pre-line"
@@ -232,8 +234,8 @@ export function Hero() {
         </motion.div>
         
         {/* Right column - conversation visual */}
-        <div className="hidden lg:block">
-          <ConversationVisual />
+        <div className="hidden lg:flex lg:items-start lg:justify-end">
+          <ConversationVisual start={conversationReady} />
         </div>
       </div>
     </Container>
